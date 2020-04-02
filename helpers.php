@@ -39,24 +39,34 @@ function sendMail($to, $payload) {
     $httpClient = new GuzzleAdapter(new Client());
     $sparky = new SparkPost($httpClient, ['key'=>'9c848fe3e351e58f5febc11863562e6f3f8cca82']);
 
-    $promise = $sparky->transmissions->post([
-        'content' => [
-            'from' => [
-                'name' => 'MSB Webhook Data',
-                'email' => 'noreply@notifications.matsugov.us',
+    //$sparky->setOptions(['async' => false]);
+
+    try {
+        $promise = $sparky->transmissions->post([
+            'content' => [
+                'from' => [
+                    'name' => 'MSB Webhook Data',
+                    'email' => 'noreply@notifications.matsugov.us',
+                ],
+                'subject' => 'Webhook Data',
+                'text' => $payload,
             ],
-            'subject' => 'Webhook Data',
-            'text' => $payload,
-        ],
-        'recipients' => [
-            [
-                'address' => [
-                    'email' => $to,
+            'recipients' => [
+                [
+                    'address' => [
+                        'email' => $to,
+                    ],
                 ],
             ],
-        ],
-    ]);
-
-    return $promise;
+        ]);
+        $response = $promise->wait();
+        echo $response->getStatusCode()."\n";
+        print_r($response->getBody())."\n";
+    }
+    catch(\Exception $e)
+    {
+        echo $e->getCode()."\n";
+        echo $e->getMessage()."\n";
+    }
 }
 
