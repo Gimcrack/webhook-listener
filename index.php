@@ -19,14 +19,13 @@ function getPost()
     return [];
 }
 
-function getKey($arr, $key)
-{
+function getKey($arr, $key) {
     if ( isset($arr[$key]) )
         return $arr[$key];
 
-    foreach($arr as $kk => $value) {
-        if ( is_array($value))
-            return getKey($value, $key);
+    foreach($arr as $value) {
+        if (is_array($value) && $v = getKey($value, $key))
+            return $v;
     }
 }
 
