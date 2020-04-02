@@ -19,14 +19,27 @@ function getPost()
     return [];
 }
 
+function getKey($arr, $key)
+{
+    if ( isset($arr[$key]) )
+        return $arr[$key];
+
+    foreach($arr as $kk => $value) {
+        if ( is_array($value))
+            return getKey($value, $key);
+    }
+}
+
 $post = getPost();
 
 if ( is_array($post) )
 {
     echo "<pre>";
-    var_dump($post);
+    var_dump(getKey($post, 'attributes'));
     echo "</pre>";
 }
+
+
 
 
 
