@@ -1,0 +1,17 @@
+{
+    "name": "ingenious/webhook-listener",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeremy Bloomstrom",
+            "email": "jeremy.bloomstrom@matsugov.us"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "guzzlehttp/guzzle": "^6.0@dev",
+        "php-http/guzzle6-adapter": "^2.0@dev",
+        "sparkpost/sparkpost": "dev-master"
+    }
+}
