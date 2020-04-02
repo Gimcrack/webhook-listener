@@ -19,7 +19,14 @@ function getPost()
     return [];
 }
 
-print_r(getPost());
+$post = getPost();
+
+if ( is_array($post) )
+{
+    echo "<pre>";
+    var_dump($post);
+    echo "</pre>";
+}
 
 
 
